@@ -1,0 +1,46 @@
+body{
+    background-color: #9fb5a6;  
+}
+
+div{
+    text-align: center;
+}
+
+h1{
+    color:#b87058;
+}
+
+a,
+a:active {
+    color:#754b3d;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #bdbdbd;
+}
+
+.btn{
+    background-color: #6e4e38; 
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    display: inline-block;
+}
+
+
+#btn2{
+margin-top: 10px
+}
+
+input {
+    width: 25%;
+    margin-top: 10px;
+}
+
+#new-btn{
+    width: 10%;
+}
