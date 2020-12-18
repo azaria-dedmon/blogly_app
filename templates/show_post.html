@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}New User{% endblock %}
+{% block content %}
+<div>
+<h1>First Post!</h1>
+<p>{{post.content}}</p>
+<i>By {{user.first_name}} {{user.last_name}} {{post.created_at}}</i>
+<p><b>Tags:</b></p> 
+
+{% for tag in tags%}
+<p>{{tag.name}}</p>
+{% endfor %}
+<form action="/users/{{user.id}}">
+    <input type="submit" value="Cancel" class="btn">
+</form>
+<form action="/posts/{{post.id}}/edit">
+    <input type="submit" value="Edit" class="btn">
+</form>
+<form action="/posts/{{post.id}}/delete" method="post">
+    <input type="submit" value="Delete" class="btn">
+</form>
+</div>
+{% endblock %}

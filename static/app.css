@@ -44,3 +44,11 @@ input {
 #new-btn{
     width: 10%;
 }
+
+.checkbox{
+    width: 2%;
+    margin-top: 0;
+}
+#cancel-btn{
+    margin-top: 2px;
+}
