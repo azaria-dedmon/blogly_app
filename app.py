@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, render_template, session, redirect, request
-from models import db, connect_db, User, Post, Tag, PostTag
+from models import db, connect_db, User, Post, Tag, Post_Tag
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 
@@ -105,7 +105,7 @@ def process_add_post(user_id):
     db.session.commit()
 
     for tag in tags:
-        tag = PostTag(post_id=post.id, tag_id=tag)
+        tag = Post_Tag(post_id=post.id, tag_id=tag.id)
 
         db.session.add(tag)
         db.session.commit()
@@ -116,16 +116,15 @@ def process_add_post(user_id):
 @app.route('/posts/<int:post_id>')
 def show_post(post_id):
     post = Post.query.get_or_404(post_id)
-    user = post.user
-    tags = post.tags
+    user = post.users
  
-    return render_template("show_post.html", post=post, user=user, tags=tags)
+    return render_template("show_post.html", post=post, user=user)
 
 
 @app.route('/posts/<int:post_id>/edit')
 def edit_post(post_id):
     post = Post.query.get_or_404(post_id)
-    user = post.user
+    user = post.users
     tags = Tag.query.all()
     return render_template("edit_post.html", user=user, post=post, tags=tags)
 
@@ -146,7 +145,7 @@ def process_post_edit(post_id):
 @app.route('/posts/<int:post_id>/delete', methods=['POST'])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
-    user = post.user
+    user = post.users
 
     delete_post = Post.query.filter_by(id=post_id).delete()
     db.session.commit()

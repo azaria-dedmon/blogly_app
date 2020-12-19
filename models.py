@@ -25,6 +25,9 @@ class User(db.Model):
     img = db.Column(db.Text)
 
 
+    posts = db.relationship('Post', backref="users", cascade = "all, delete-orphan")
+
+
 class Post(db.Model):
     """Blog posts"""
 
@@ -43,9 +46,7 @@ class Post(db.Model):
                            db.ForeignKey('users.id',
                                          ondelete='CASCADE'))
 
-    user = db.relationship('User', backref="posts", passive_deletes=True)
-
-    tags = db.relationship('Tag', secondary="posttags", backref="posts")
+    tags = db.relationship('Tag', secondary="post_tags", backref="posts")
 
 class Tag(db.Model):
 
@@ -59,9 +60,9 @@ class Tag(db.Model):
     
  
 
-class PostTag(db.Model):
+class Post_Tag(db.Model):
 
-    __tablename__ = "posttags"
+    __tablename__ = "post_tags"
 
     post_id = db.Column(db.Integer,
                         db.ForeignKey('posts.id'), primary_key=True)

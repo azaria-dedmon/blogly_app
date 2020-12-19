@@ -7,7 +7,7 @@
 <i>By {{user.first_name}} {{user.last_name}} {{post.created_at}}</i>
 <p><b>Tags:</b></p> 
 
-{% for tag in tags%}
+{% for tag in post.tags%}
 <p>{{tag.name}}</p>
 {% endfor %}
 <form action="/users/{{user.id}}">
