@@ -52,3 +52,13 @@ input {
 #cancel-btn{
     margin-top: 2px;
 }
+
+.tags{
+    background-color:#2287e0;
+    width: 15%;
+    color: white;
+    border-radius: 25px;
+    margin-left: 455px;
+
+}
+

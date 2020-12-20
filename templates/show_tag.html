@@ -5,7 +5,7 @@
 
 <ul>
     {% for post in tags.posts%}
-    <a href="/posts/{{post.id}}"><li>{{post}}</li></a>
+    <a href="/posts/{{post.id}}"><li>{{post.title}}</li></a>
     {% endfor %}
 </ul>
 
@@ -15,4 +15,5 @@
 <form action="/tags/{{tags.id}}/delete" method="post">
     <input class="btn" type="submit" value="Delete">
 </form>
+<a href="/tags">Back to Tag Home</a>
 {% endblock %}

@@ -28,6 +28,7 @@ class User(db.Model):
     posts = db.relationship('Post', backref="users", cascade = "all, delete-orphan")
 
 
+
 class Post(db.Model):
     """Blog posts"""
 
@@ -46,7 +47,12 @@ class Post(db.Model):
                            db.ForeignKey('users.id',
                                          ondelete='CASCADE'))
 
-    tags = db.relationship('Tag', secondary="post_tags", backref="posts")
+    tags = db.relationship('Tag', 
+                            secondary="post_tags", 
+                            back_populates="posts",
+                            cascade="all, delete"
+                            )
+
 
 class Tag(db.Model):
 
@@ -57,6 +63,9 @@ class Tag(db.Model):
                        autoincrement=True)
     name = db.Column(db.String,
                         unique=True)
+    posts = db.relationship('Post',
+                            secondary="post_tags",
+                            back_populates="tags")
     
  
 
@@ -65,8 +74,7 @@ class Post_Tag(db.Model):
     __tablename__ = "post_tags"
 
     post_id = db.Column(db.Integer,
-                        db.ForeignKey('posts.id'), primary_key=True)
+                        db.ForeignKey('posts.id', ondelete='CASCADE'), primary_key=True)
     
     tag_id = db.Column(db.Integer,
                         db.ForeignKey('tags.id'), primary_key=True)
-

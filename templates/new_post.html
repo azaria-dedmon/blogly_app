@@ -11,8 +11,8 @@
         <textarea name="content" id="content"></textarea>
     </div>
         {% for tag in tags%}
-        <input class="checkbox" type="checkbox" id="{{tag.name}}" name="tag-name" value="{{tag.name}}">
-        <label for="{{tag.name}}">{{tag.name}}</label><br>
+        <input class="checkbox" type="checkbox" id="tag{{tagid}}" name="tag-name" value="{{tag.id}}">
+        <label for="tag{{tag.id}}">{{tag.name}}</label><br>
         {% endfor %}
     <input id='new-btn' class="btn" type="submit" value="Add">
 </form>

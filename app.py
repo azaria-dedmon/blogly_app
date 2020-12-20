@@ -96,19 +96,15 @@ def add_post(user_id):
 def process_add_post(user_id):
     title = request.form["title"]
     content = request.form["content"]
-    tags = request.form.getlist('tag-name')
-    user = User.query.get_or_404(user_id)   
+    user = User.query.get_or_404(user_id)  
 
-    post = Post(title=title, content=content, user_table=user.id)
+    tag_ids = [int(num) for num in request.form.getlist("tag-name")]
+    tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+
+    post = Post(title=title, content=content, user_table=user.id, tags=tags)
 
     db.session.add(post)
     db.session.commit()
-
-    for tag in tags:
-        tag = Post_Tag(post_id=post.id, tag_id=tag.id)
-
-        db.session.add(tag)
-        db.session.commit()
 
     return redirect(f"/users/{user.id}")
 
@@ -134,9 +130,13 @@ def process_post_edit(post_id):
     title = request.form["title"]
     content = request.form["content"]
     post = Post.query.get_or_404(post_id)
-
+    
+    tag_ids = [int(num) for num in request.form.getlist("tag-name")]
+    tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+    
     post.title = title
     post.content = content
+    post.tags = tags
     db.session.commit()
 
     return redirect(f"/posts/{post.id}")

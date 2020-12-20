@@ -2,13 +2,13 @@
 {% block title %}New User{% endblock %}
 {% block content %}
 <div>
-<h1>First Post!</h1>
+<h1>{{post.title}}</h1>
 <p>{{post.content}}</p>
 <i>By {{user.first_name}} {{user.last_name}} {{post.created_at}}</i>
 <p><b>Tags:</b></p> 
 
 {% for tag in post.tags%}
-<p>{{tag.name}}</p>
+<p class='tags'>{{tag.name}}</p>
 {% endfor %}
 <form action="/users/{{user.id}}">
     <input type="submit" value="Cancel" class="btn">
